@@ -1,2 +1,2 @@
 # restaurant
-Joseph's restuarant
+Joseph's restaurant
