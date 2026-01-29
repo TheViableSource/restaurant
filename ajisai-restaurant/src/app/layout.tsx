@@ -8,32 +8,36 @@ const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ajisai Sushi & Steak | Fine Dining Sushi in Portland, Oregon',
+    default: 'Ajisai | Premier Sushi & Steakhouse in Portland, OR',
     template: '%s | Ajisai Sushi & Steak Portland',
   },
   description:
-    'Experience the finest sushi and Japanese cuisine in Portland, Oregon at Ajisai. Our master chefs craft exquisite sashimi, artisan rolls, and premium wagyu steak in an upscale yet welcoming atmosphere. Reserve your table today.',
+    'Experience authentic Japanese fine dining in Portland. Serving exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.',
   keywords: [
-    'Fine Dining Sushi Portland Oregon',
-    'Upscale Sushi Experience Portland',
+    'Premier Sushi Portland Oregon',
+    'Japanese Steakhouse Portland',
     'Best Sushi Portland',
-    'Japanese Cuisine Portland',
+    'Japanese Fine Dining Portland',
     'Sashimi Portland',
     'Omakase Portland',
-    'Japanese Restaurant Portland',
+    'Tonkotsu Ramen Portland',
     'Wagyu Steak Portland',
-    'Ramen Portland',
+    'Upscale Japanese Restaurant Portland',
     'Ajisai Portland',
+    'Pearl District Sushi',
+    'Date Night Portland',
   ],
   authors: [{ name: 'Ajisai Sushi & Steak' }],
   creator: 'Ajisai Sushi & Steak',
@@ -48,9 +52,9 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Ajisai Sushi & Steak | Fine Dining Sushi in Portland, Oregon',
+    title: 'Ajisai | Premier Sushi & Steakhouse in Portland, OR',
     description:
-      'Experience the finest sushi and Japanese cuisine in Portland at Ajisai. Master-crafted sashimi, artisan rolls, and premium wagyu in an upscale atmosphere.',
+      'Experience authentic Japanese fine dining in Portland. Exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere.',
     url: 'https://ajisaisushisteak.com',
     siteName: 'Ajisai Sushi & Steak',
     locale: 'en_US',
@@ -60,15 +64,15 @@ export const metadata: Metadata = {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Ajisai Sushi & Steak - Fine Dining in Portland, Oregon',
+        alt: 'Ajisai - Premier Japanese Fine Dining in Portland, Oregon',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ajisai Sushi & Steak | Fine Dining Sushi in Portland, Oregon',
+    title: 'Ajisai | Premier Sushi & Steakhouse in Portland, OR',
     description:
-      'Experience the finest sushi and Japanese cuisine in Portland at Ajisai.',
+      'Experience authentic Japanese fine dining in Portland. Sushi. Steak. Ramen. Elegance.',
     images: ['/images/og-image.jpg'],
   },
   robots: {
@@ -84,27 +88,34 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Structured Data
+// JSON-LD Structured Data - LocalBusiness > Restaurant Schema
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
-  name: 'Ajisai Sushi & Steak',
-  image: 'https://ajisaisushisteak.com/images/restaurant-exterior.jpg',
+  '@id': 'https://ajisaisushisteak.com/#restaurant',
+  name: 'Ajisai',
+  alternateName: 'Ajisai Sushi & Steak',
+  description: 'Experience authentic Japanese fine dining in Portland. Serving exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere.',
+  image: [
+    'https://ajisaisushisteak.com/images/og-image.jpg',
+    'https://ajisaisushisteak.com/images/restaurant-interior.jpg',
+    'https://ajisaisushisteak.com/images/sushi-platter.jpg',
+  ],
   url: 'https://ajisaisushisteak.com',
   telephone: '+1-503-555-0142',
   email: 'hello@ajisaisushisteak.com',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '1234 NW 23rd Avenue',
+    streetAddress: '123 Pearl District',
     addressLocality: 'Portland',
     addressRegion: 'OR',
-    postalCode: '97210',
+    postalCode: '97209',
     addressCountry: 'US',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 45.528916,
-    longitude: -122.699763,
+    latitude: 45.5267,
+    longitude: -122.6836,
   },
   openingHoursSpecification: [
     {
@@ -126,17 +137,73 @@ const jsonLd = {
       closes: '21:00',
     },
   ],
-  servesCuisine: ['Sushi', 'Japanese', 'Fusion', 'Asian'],
+  servesCuisine: 'Japanese',
   priceRange: '$$$',
-  hasMenu: 'https://ajisaisushisteak.com/menus',
-  acceptsReservations: 'True',
-  menu: 'https://ajisaisushisteak.com/menus',
-  paymentAccepted: ['Cash', 'Credit Card', 'Debit Card'],
+  hasMenu: {
+    '@type': 'Menu',
+    url: 'https://ajisaisushisteak.com/menus',
+    hasMenuSection: [
+      {
+        '@type': 'MenuSection',
+        name: 'Sushi & Sashimi',
+        description: 'Premium cuts of the freshest fish, flown in daily',
+      },
+      {
+        '@type': 'MenuSection',
+        name: 'Ramen & Udon',
+        description: 'Rich, slow-simmered broths with handcrafted noodles',
+      },
+      {
+        '@type': 'MenuSection',
+        name: 'Signature Rolls',
+        description: 'Creative combinations blending tradition with innovation',
+      },
+    ],
+  },
+  acceptsReservations: true,
+  reservations: 'https://ajisaisushisteak.com/reservations',
+  paymentAccepted: ['Cash', 'Credit Card', 'Debit Card', 'Apple Pay', 'Google Pay'],
   currenciesAccepted: 'USD',
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.8',
+    bestRating: '5',
+    worstRating: '1',
     reviewCount: '487',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: 'Sarah M.',
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+      },
+      reviewBody: 'The omakase experience at Ajisai was nothing short of extraordinary. Each course was a work of art.',
+    },
+  ],
+  sameAs: [
+    'https://instagram.com/ajisaisushisteak',
+    'https://facebook.com/ajisaisushisteak',
+    'https://yelp.com/biz/ajisai-portland',
+  ],
+  potentialAction: {
+    '@type': 'ReserveAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://ajisaisushisteak.com/reservations',
+      actionPlatform: [
+        'http://schema.org/DesktopWebPlatform',
+        'http://schema.org/MobileWebPlatform',
+      ],
+    },
+    result: {
+      '@type': 'Reservation',
+      name: 'Table Reservation',
+    },
   },
 };
 
