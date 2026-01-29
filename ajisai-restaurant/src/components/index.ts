@@ -5,3 +5,15 @@ export { default as MenuSection } from './MenuSection';
 export { default as ReservationCallout } from './ReservationCallout';
 export { default as ContactForm } from './ContactForm';
 export { default as MapEmbed } from './MapEmbed';
+export { 
+  FadeInUp, 
+  FadeInLeft, 
+  FadeInRight, 
+  ScaleIn, 
+  StaggerContainer, 
+  StaggerItem,
+  ParallaxImage,
+  HoverScale,
+  TextReveal,
+  Fade
+} from './MotionWrapper';

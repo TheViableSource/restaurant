@@ -2,6 +2,29 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// Hydrangea flower SVG matching the brand
+const AjisaiFlower = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 100 100"
+    fill="currentColor"
+  >
+    <circle cx="50" cy="32" r="9" opacity="0.9" />
+    <circle cx="38" cy="40" r="7" opacity="0.85" />
+    <circle cx="62" cy="40" r="7" opacity="0.85" />
+    <circle cx="32" cy="50" r="6" opacity="0.8" />
+    <circle cx="68" cy="50" r="6" opacity="0.8" />
+    <circle cx="38" cy="56" r="7" opacity="0.85" />
+    <circle cx="62" cy="56" r="7" opacity="0.85" />
+    <circle cx="50" cy="48" r="8" opacity="0.9" />
+    <circle cx="50" cy="60" r="6" opacity="0.8" />
+    <rect x="48" y="66" width="4" height="22" rx="2" />
+    <ellipse cx="42" cy="78" rx="6" ry="3" transform="rotate(-30 42 78)" opacity="0.7" />
+    <ellipse cx="58" cy="78" rx="6" ry="3" transform="rotate(30 58 78)" opacity="0.7" />
+  </svg>
+);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,36 +47,25 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
+    <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white shadow-lg py-2'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-2'
           : 'bg-transparent py-4'
       }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 group">
             <div className={`transition-colors duration-300 ${isScrolled ? 'text-burgundy' : 'text-white'}`}>
-              <svg
-                className="w-10 h-10"
-                viewBox="0 0 100 100"
-                fill="currentColor"
-              >
-                <circle cx="50" cy="35" r="8" />
-                <circle cx="35" cy="45" r="6" />
-                <circle cx="65" cy="45" r="6" />
-                <circle cx="30" cy="55" r="5" />
-                <circle cx="70" cy="55" r="5" />
-                <circle cx="40" cy="55" r="6" />
-                <circle cx="60" cy="55" r="6" />
-                <circle cx="50" cy="50" r="7" />
-                <rect x="48" y="60" width="4" height="25" />
-              </svg>
+              <AjisaiFlower className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" />
             </div>
             <span
-              className={`text-2xl font-serif tracking-widest transition-colors duration-300 ${
+              className={`text-2xl font-serif tracking-[0.2em] transition-colors duration-300 ${
                 isScrolled ? 'text-burgundy' : 'text-white'
               }`}
             >
@@ -116,31 +128,51 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pb-4 animate-fade-in">
-            <div className="bg-white rounded-lg shadow-lg p-4 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-gray-700 text-sm tracking-wider uppercase hover:text-burgundy transition-colors"
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              className="md:hidden mt-4 pb-4"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="bg-white rounded-lg shadow-lg p-4 space-y-4">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-gray-700 text-sm tracking-wider uppercase hover:text-burgundy transition-colors py-2"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 }}
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/reservations"
-                onClick={() => setIsOpen(false)}
-                className="block bg-burgundy text-white px-6 py-3 text-sm tracking-wider uppercase text-center hover:bg-burgundy-dark transition-colors"
-              >
-                Reserve Now
-              </Link>
-            </div>
-          </div>
-        )}
+                  <Link
+                    href="/reservations"
+                    onClick={() => setIsOpen(false)}
+                    className="block bg-burgundy text-white px-6 py-3 text-sm tracking-wider uppercase text-center hover:bg-burgundy-dark transition-colors rounded-sm"
+                  >
+                    Reserve Now
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

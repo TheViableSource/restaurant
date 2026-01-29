@@ -1,33 +1,14 @@
-import { Metadata } from 'next';
+'use client';
+
 import Hero from '@/components/Hero';
 import ContactForm from '@/components/ContactForm';
 import MapEmbed from '@/components/MapEmbed';
+import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Contact Us | Get in Touch',
-  description:
-    'Contact Ajisai Sushi & Steak in Portland, Oregon. Find our location, hours, phone number, and send us a message. We\'d love to hear from you.',
-  keywords: [
-    'Contact Ajisai Portland',
-    'Ajisai Phone Number',
-    'Ajisai Location',
-    'Portland Sushi Restaurant Address',
-    'Japanese Restaurant Contact',
-  ],
-  openGraph: {
-    title: 'Contact Ajisai Sushi & Steak Portland',
-    description:
-      'Get in touch with us. Find our location, hours, and contact information.',
-    url: 'https://ajisaisushisteak.com/contact',
-    images: [
-      {
-        url: '/images/contact-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Ajisai Restaurant Location in Portland',
-      },
-    ],
-  },
+// Real Unsplash image for hero
+const CONTACT_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop',
 };
 
 export default function ContactPage() {
@@ -38,108 +19,107 @@ export default function ContactPage() {
         title="Contact Us"
         subtitle="We'd love to hear from you"
         showCTA={false}
-        imageUrl="/images/contact-hero.jpg"
+        imageUrl={CONTACT_IMAGES.hero}
         height="medium"
       />
 
       {/* Contact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div>
-              <span className="text-gold text-sm tracking-widest uppercase">Get in Touch</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2 mb-6">
+            <FadeInLeft>
+              <span className="text-gold text-sm tracking-widest uppercase font-medium">Get in Touch</span>
+              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3 mb-6">
                 Send Us a Message
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 mb-8 text-lg">
                 Have a question, comment, or special request? We&apos;re here to help. Fill out the form 
                 below and our team will get back to you as soon as possible.
               </p>
               <ContactForm />
-            </div>
+            </FadeInLeft>
 
             {/* Contact Info & Map */}
-            <div>
-              <span className="text-gold text-sm tracking-widest uppercase">Visit Us</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2 mb-6">
+            <FadeInRight delay={0.2}>
+              <span className="text-gold text-sm tracking-widest uppercase font-medium">Visit Us</span>
+              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3 mb-6">
                 Find Our Location
               </h2>
 
               {/* Contact Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                <div className="bg-cream rounded-lg p-6">
-                  <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                <StaggerItem>
+                  <div className="bg-cream rounded-lg p-6">
+                    <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-serif text-lg text-burgundy mb-2">Address</h3>
+                    <p className="text-gray-600 text-sm">
+                      123 Pearl District<br />
+                      Portland, OR 97209
+                    </p>
                   </div>
-                  <h3 className="font-serif text-lg text-burgundy mb-2">Address</h3>
-                  <p className="text-gray-600 text-sm">
-                    1234 NW 23rd Avenue<br />
-                    Portland, OR 97210
-                  </p>
-                </div>
+                </StaggerItem>
 
-                <div className="bg-cream rounded-lg p-6">
-                  <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                <StaggerItem>
+                  <div className="bg-cream rounded-lg p-6">
+                    <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
+                      <Phone className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-serif text-lg text-burgundy mb-2">Phone</h3>
+                    <p className="text-gray-600 text-sm">
+                      <a href="tel:+15035550142" className="hover:text-burgundy transition-colors">
+                        (503) 555-0142
+                      </a>
+                    </p>
                   </div>
-                  <h3 className="font-serif text-lg text-burgundy mb-2">Phone</h3>
-                  <p className="text-gray-600 text-sm">
-                    <a href="tel:+15035550142" className="hover:text-burgundy transition-colors">
-                      (503) 555-0142
-                    </a>
-                  </p>
-                </div>
+                </StaggerItem>
 
-                <div className="bg-cream rounded-lg p-6">
-                  <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                <StaggerItem>
+                  <div className="bg-cream rounded-lg p-6">
+                    <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
+                      <Mail className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-serif text-lg text-burgundy mb-2">Email</h3>
+                    <p className="text-gray-600 text-sm">
+                      <a href="mailto:hello@ajisaisushisteak.com" className="hover:text-burgundy transition-colors">
+                        hello@ajisaisushisteak.com
+                      </a>
+                    </p>
                   </div>
-                  <h3 className="font-serif text-lg text-burgundy mb-2">Email</h3>
-                  <p className="text-gray-600 text-sm">
-                    <a href="mailto:hello@ajisaisushisteak.com" className="hover:text-burgundy transition-colors">
-                      hello@ajisaisushisteak.com
-                    </a>
-                  </p>
-                </div>
+                </StaggerItem>
 
-                <div className="bg-cream rounded-lg p-6">
-                  <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                <StaggerItem>
+                  <div className="bg-cream rounded-lg p-6">
+                    <div className="bg-burgundy rounded-full p-3 inline-block mb-4">
+                      <Clock className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="font-serif text-lg text-burgundy mb-2">Hours</h3>
+                    <p className="text-gray-600 text-sm">
+                      Mon-Thu: 11AM - 10PM<br />
+                      Fri-Sat: 11AM - 11PM<br />
+                      Sun: 12PM - 9PM
+                    </p>
                   </div>
-                  <h3 className="font-serif text-lg text-burgundy mb-2">Hours</h3>
-                  <p className="text-gray-600 text-sm">
-                    Mon-Thu: 11AM - 10PM<br />
-                    Fri-Sat: 11AM - 11PM<br />
-                    Sun: 12PM - 9PM
-                  </p>
-                </div>
-              </div>
+                </StaggerItem>
+              </StaggerContainer>
 
               {/* Map */}
               <MapEmbed />
-            </div>
+            </FadeInRight>
           </div>
         </div>
       </section>
 
       {/* Social Media Section */}
-      <section className="py-16 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-gold text-sm tracking-widest uppercase">Follow Along</span>
-          <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2 mb-6">
+      <section className="py-20 bg-cream">
+        <FadeInUp className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-gold text-sm tracking-widest uppercase font-medium">Follow Along</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3 mb-6">
             Connect With Us
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-600 mb-8 text-lg">
             Stay updated on seasonal specials, behind-the-scenes moments, and more.
           </p>
           <div className="flex justify-center space-x-6">
@@ -147,7 +127,7 @@ export default function ContactPage() {
               href="https://instagram.com/ajisaisushisteak"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark transition-colors"
+              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark hover:scale-110 transition-all duration-300"
               aria-label="Follow us on Instagram"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -158,7 +138,7 @@ export default function ContactPage() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark transition-colors"
+              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark hover:scale-110 transition-all duration-300"
               aria-label="Follow us on Facebook"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -169,7 +149,7 @@ export default function ContactPage() {
               href="https://yelp.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark transition-colors"
+              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark hover:scale-110 transition-all duration-300"
               aria-label="Find us on Yelp"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -180,7 +160,7 @@ export default function ContactPage() {
               href="https://google.com/maps"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark transition-colors"
+              className="bg-burgundy text-white p-4 rounded-full hover:bg-burgundy-dark hover:scale-110 transition-all duration-300"
               aria-label="Find us on Google Maps"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -191,20 +171,20 @@ export default function ContactPage() {
           <p className="mt-6 text-gray-500 text-sm">
             @ajisaisushisteak on Instagram
           </p>
-        </div>
+        </FadeInUp>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-gold text-sm tracking-widest uppercase">FAQ</span>
-            <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2">
+          <FadeInUp className="text-center mb-12">
+            <span className="text-gold text-sm tracking-widest uppercase font-medium">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3">
               Frequently Asked Questions
             </h2>
-          </div>
+          </FadeInUp>
 
-          <div className="space-y-6">
+          <StaggerContainer className="space-y-6">
             {[
               {
                 question: 'Do you take reservations?',
@@ -212,7 +192,7 @@ export default function ContactPage() {
               },
               {
                 question: 'Is there parking available?',
-                answer: 'Street parking is available on NW 23rd Avenue and surrounding streets. There is also a public parking garage located on NW 24th Avenue, about a block from the restaurant.',
+                answer: 'Street parking is available on Pearl District streets. There is also a public parking garage located nearby, about a block from the restaurant.',
               },
               {
                 question: 'Do you accommodate dietary restrictions?',
@@ -231,12 +211,14 @@ export default function ContactPage() {
                 answer: 'Yes! You can place takeout orders by phone or through our website. Delivery is available within a 5-mile radius through our delivery partners.',
               },
             ].map((faq, index) => (
-              <div key={index} className="bg-cream rounded-lg p-6">
-                <h3 className="font-serif text-lg text-burgundy mb-2">{faq.question}</h3>
-                <p className="text-gray-600">{faq.answer}</p>
-              </div>
+              <StaggerItem key={index}>
+                <div className="bg-cream rounded-lg p-6 hover:shadow-md transition-shadow">
+                  <h3 className="font-serif text-lg text-burgundy mb-2">{faq.question}</h3>
+                  <p className="text-gray-600">{faq.answer}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
     </>

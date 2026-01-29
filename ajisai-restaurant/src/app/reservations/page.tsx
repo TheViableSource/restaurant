@@ -1,33 +1,16 @@
-import { Metadata } from 'next';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
+import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '@/components/MotionWrapper';
+import { Heart, Users, Building2, Sparkles } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Reservations | Book Your Table',
-  description:
-    'Reserve your table at Ajisai Sushi & Steak in Portland, Oregon. Book online for intimate dinners, special celebrations, or private events. Walk-ins welcome.',
-  keywords: [
-    'Ajisai Reservations',
-    'Book Table Portland Sushi',
-    'Portland Restaurant Reservations',
-    'Private Dining Portland',
-    'Special Events Portland',
-  ],
-  openGraph: {
-    title: 'Reserve Your Table | Ajisai Sushi & Steak Portland',
-    description:
-      'Book your unforgettable dining experience at Ajisai. Reservations available for dinner service.',
-    url: 'https://ajisaisushisteak.com/reservations',
-    images: [
-      {
-        url: '/images/reservations-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Ajisai Restaurant Interior - Reserve Your Table',
-      },
-    ],
-  },
+// Real Unsplash images for reservations page
+const RESERVATION_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop',
+  diningRoom: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=2070&auto=format&fit=crop',
+  takeout: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?q=80&w=1964&auto=format&fit=crop',
 };
 
 export default function ReservationsPage() {
@@ -36,41 +19,25 @@ export default function ReservationsPage() {
       name: 'Intimate Dining',
       capacity: '2-4 guests',
       description: 'Perfect for romantic dinners or small celebrations at our sushi bar.',
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      ),
+      icon: Heart,
     },
     {
       name: 'Group Dining',
       capacity: '5-12 guests',
       description: 'Semi-private area ideal for birthday parties, work gatherings, or family celebrations.',
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
+      icon: Users,
     },
     {
       name: 'Private Tatami Room',
       capacity: '8-20 guests',
       description: 'Traditional Japanese tatami room for corporate events and special occasions.',
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-      ),
+      icon: Building2,
     },
     {
       name: 'Full Buyout',
       capacity: '40-60 guests',
       description: 'Exclusive restaurant buyout for weddings, galas, and milestone celebrations.',
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-        </svg>
-      ),
+      icon: Sparkles,
     },
   ];
 
@@ -79,28 +46,28 @@ export default function ReservationsPage() {
       {/* Hero Section */}
       <Hero
         title="Reserve Your Table"
-        subtitle="Join us for an unforgettable culinary journey"
+        subtitle="Join us for an unforgettable culinary journey through the art of Japanese cuisine"
         showCTA={false}
-        imageUrl="/images/reservations-hero.jpg"
+        imageUrl={RESERVATION_IMAGES.hero}
         height="medium"
       />
 
       {/* Reservation Widget Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <span className="text-gold text-sm tracking-widest uppercase">Book Online</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2 mb-6">
+            <FadeInLeft>
+              <span className="text-gold text-sm tracking-widest uppercase font-medium">Book Online</span>
+              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3 mb-6">
                 Secure Your Spot
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-8">
+              <p className="text-gray-600 leading-relaxed mb-8 text-lg">
                 We recommend making reservations in advance, especially for weekend dining and 
                 special occasions. Our online booking system allows you to select your preferred 
                 date, time, and party size.
               </p>
 
-              {/* Reservation Form Placeholder */}
+              {/* Reservation Form */}
               <div className="bg-cream rounded-lg p-8">
                 <h3 className="text-xl font-serif text-burgundy mb-6">Make a Reservation</h3>
                 <form className="space-y-6">
@@ -200,7 +167,7 @@ export default function ReservationsPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-burgundy text-white py-4 px-8 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary"
+                    className="w-full bg-burgundy text-white py-4 px-8 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary rounded-sm"
                   >
                     Request Reservation
                   </button>
@@ -209,15 +176,16 @@ export default function ReservationsPage() {
                   You will receive a confirmation email within 24 hours.
                 </p>
               </div>
-            </div>
+            </FadeInLeft>
 
-            <div>
+            <FadeInRight delay={0.2}>
               <div className="aspect-[4/3] relative rounded-lg overflow-hidden shadow-xl mb-8">
                 <Image
-                  src="/images/dining-room.jpg"
+                  src={RESERVATION_IMAGES.diningRoom}
                   alt="Elegant dining room at Ajisai restaurant in Portland"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 
@@ -259,70 +227,75 @@ export default function ReservationsPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </FadeInRight>
           </div>
         </div>
       </section>
 
       {/* Private Events Section */}
-      <section className="py-20 bg-cream">
+      <section className="py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-gold text-sm tracking-widest uppercase">Private Events</span>
-            <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2">
+          <FadeInUp className="text-center mb-16">
+            <span className="text-gold text-sm tracking-widest uppercase font-medium">Private Events</span>
+            <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3">
               Host Your Special Occasion
             </h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">
               From intimate gatherings to grand celebrations, we offer customized dining experiences 
               tailored to your needs.
             </p>
-          </div>
+          </FadeInUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {privateEvents.map((event, index) => (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-lg text-center hover:shadow-xl transition-shadow">
-                <div className="bg-burgundy/10 rounded-full p-4 text-burgundy inline-block mb-4">
-                  {event.icon}
+              <StaggerItem key={index}>
+                <div className="bg-white rounded-lg p-8 shadow-lg text-center hover:shadow-xl transition-shadow h-full">
+                  <div className="bg-burgundy/10 rounded-full p-4 text-burgundy inline-block mb-4">
+                    <event.icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-serif text-burgundy mb-2">{event.name}</h3>
+                  <p className="text-gold text-sm mb-3 font-medium">{event.capacity}</p>
+                  <p className="text-gray-600 text-sm">{event.description}</p>
                 </div>
-                <h3 className="text-xl font-serif text-burgundy mb-2">{event.name}</h3>
-                <p className="text-gold text-sm mb-3">{event.capacity}</p>
-                <p className="text-gray-600 text-sm">{event.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
-          <div className="text-center mt-12">
+          <FadeInUp delay={0.4} className="text-center mt-12">
             <Link
               href="/contact"
-              className="inline-block bg-burgundy text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary"
+              className="inline-block bg-burgundy text-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary rounded-sm"
             >
               Inquire About Private Events
             </Link>
-          </div>
+          </FadeInUp>
         </div>
       </section>
 
       {/* Takeout & Delivery */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="aspect-[4/5] relative rounded-lg overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/takeout.jpg"
-                  alt="Ajisai takeout packaging with sushi and bento"
-                  fill
-                  className="object-cover"
-                />
+            <FadeInLeft>
+              <div className="relative">
+                <div className="aspect-[4/5] relative rounded-lg overflow-hidden shadow-2xl">
+                  <Image
+                    src={RESERVATION_IMAGES.takeout}
+                    alt="Ajisai takeout packaging with sushi and bento"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-burgundy/10 rounded-lg -z-10" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-burgundy/10 rounded-lg -z-10" />
-            </div>
-            <div>
-              <span className="text-gold text-sm tracking-widest uppercase">Take Home</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-2 mb-6">
+            </FadeInLeft>
+            <FadeInRight delay={0.2}>
+              <span className="text-gold text-sm tracking-widest uppercase font-medium">Take Home</span>
+              <h2 className="text-3xl md:text-4xl font-serif text-burgundy mt-3 mb-6">
                 Catering, Delivery & Takeout
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <p className="text-gray-600 leading-relaxed mb-6 text-lg">
                 Enjoy the Ajisai experience in the comfort of your home. Our takeout and delivery 
                 options bring the same quality and care to your doorstep.
               </p>
@@ -355,18 +328,18 @@ export default function ReservationsPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="tel:+15035550142"
-                  className="bg-burgundy text-white px-8 py-4 text-sm tracking-widest uppercase text-center hover:bg-burgundy-dark transition-all duration-300 btn-primary"
+                  className="bg-burgundy text-white px-10 py-4 text-sm tracking-widest uppercase text-center hover:bg-burgundy-dark transition-all duration-300 btn-primary rounded-sm"
                 >
                   Order by Phone
                 </a>
                 <Link
                   href="/menus"
-                  className="border-2 border-burgundy text-burgundy px-8 py-4 text-sm tracking-widest uppercase text-center hover:bg-burgundy hover:text-white transition-all duration-300"
+                  className="border-2 border-burgundy text-burgundy px-10 py-4 text-sm tracking-widest uppercase text-center hover:bg-burgundy hover:text-white transition-all duration-300 rounded-sm"
                 >
                   View Takeout Menu
                 </Link>
               </div>
-            </div>
+            </FadeInRight>
           </div>
         </div>
       </section>

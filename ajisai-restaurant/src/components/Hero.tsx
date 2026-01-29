@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface HeroProps {
   title: string;
@@ -9,11 +12,36 @@ interface HeroProps {
   height?: 'full' | 'large' | 'medium';
 }
 
+// Hydrangea flower SVG icon matching the Ajisai brand
+const AjisaiFlower = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 100 100"
+    fill="currentColor"
+  >
+    {/* Center flower cluster - represents hydrangea petals */}
+    <circle cx="50" cy="32" r="9" opacity="0.9" />
+    <circle cx="38" cy="40" r="7" opacity="0.85" />
+    <circle cx="62" cy="40" r="7" opacity="0.85" />
+    <circle cx="32" cy="50" r="6" opacity="0.8" />
+    <circle cx="68" cy="50" r="6" opacity="0.8" />
+    <circle cx="38" cy="56" r="7" opacity="0.85" />
+    <circle cx="62" cy="56" r="7" opacity="0.85" />
+    <circle cx="50" cy="48" r="8" opacity="0.9" />
+    <circle cx="50" cy="60" r="6" opacity="0.8" />
+    {/* Stem */}
+    <rect x="48" y="66" width="4" height="22" rx="2" />
+    {/* Small leaf details */}
+    <ellipse cx="42" cy="78" rx="6" ry="3" transform="rotate(-30 42 78)" opacity="0.7" />
+    <ellipse cx="58" cy="78" rx="6" ry="3" transform="rotate(30 58 78)" opacity="0.7" />
+  </svg>
+);
+
 const Hero = ({
   title,
   subtitle,
   showCTA = true,
-  imageUrl = '/images/hero-sushi.jpg',
+  imageUrl = 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=2070&auto=format&fit=crop',
   height = 'full',
 }: HeroProps) => {
   const heightClasses = {
@@ -24,8 +52,13 @@ const Hero = ({
 
   return (
     <section className={`relative ${heightClasses[height]} flex items-center justify-center overflow-hidden`}>
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Image with subtle zoom animation */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+      >
         <Image
           src={imageUrl}
           alt="Exquisite sushi presentation at Ajisai restaurant in Portland"
@@ -33,75 +66,92 @@ const Hero = ({
           className="object-cover"
           priority
           quality={90}
+          sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/70" />
+      </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto animate-fade-in">
-        {/* Decorative Element */}
-        <div className="flex justify-center mb-6">
-          <svg
-            className="w-16 h-16 text-gold"
-            viewBox="0 0 100 100"
-            fill="currentColor"
-          >
-            <circle cx="50" cy="35" r="8" />
-            <circle cx="35" cy="45" r="6" />
-            <circle cx="65" cy="45" r="6" />
-            <circle cx="30" cy="55" r="5" />
-            <circle cx="70" cy="55" r="5" />
-            <circle cx="40" cy="55" r="6" />
-            <circle cx="60" cy="55" r="6" />
-            <circle cx="50" cy="50" r="7" />
-            <rect x="48" y="60" width="4" height="25" />
-          </svg>
-        </div>
+      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+        {/* Decorative Flower Element */}
+        <motion.div 
+          className="flex justify-center mb-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <AjisaiFlower className="w-20 h-20 text-gold drop-shadow-lg" />
+        </motion.div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide mb-6 text-shadow">
+        <motion.h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide mb-6 text-shadow-lg leading-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           {title}
-        </h1>
+        </motion.h1>
 
         {subtitle && (
-          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <motion.p 
+            className="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             {subtitle}
-          </p>
+          </motion.p>
         )}
 
         {showCTA && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             <Link
               href="/reservations"
-              className="bg-burgundy text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary"
+              className="bg-burgundy text-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-burgundy-dark transition-all duration-300 btn-primary rounded-sm"
             >
               Reserve Your Table
             </Link>
             <Link
               href="/menus"
-              className="bg-transparent border-2 border-white text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-white hover:text-burgundy transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-white hover:text-burgundy transition-all duration-300 rounded-sm"
             >
               Explore Our Menu
             </Link>
-          </div>
+          </motion.div>
         )}
 
         {/* Scroll Indicator */}
         {height === 'full' && (
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg
-              className="w-6 h-6 text-white/70"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <motion.div 
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
+              <svg
+                className="w-6 h-6 text-white/70"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </section>
