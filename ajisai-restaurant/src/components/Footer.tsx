@@ -1,5 +1,27 @@
 import Link from 'next/link';
 
+// Hydrangea flower SVG matching the brand
+const AjisaiFlower = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 100 100"
+    fill="currentColor"
+  >
+    <circle cx="50" cy="32" r="9" opacity="0.9" />
+    <circle cx="38" cy="40" r="7" opacity="0.85" />
+    <circle cx="62" cy="40" r="7" opacity="0.85" />
+    <circle cx="32" cy="50" r="6" opacity="0.8" />
+    <circle cx="68" cy="50" r="6" opacity="0.8" />
+    <circle cx="38" cy="56" r="7" opacity="0.85" />
+    <circle cx="62" cy="56" r="7" opacity="0.85" />
+    <circle cx="50" cy="48" r="8" opacity="0.9" />
+    <circle cx="50" cy="60" r="6" opacity="0.8" />
+    <rect x="48" y="66" width="4" height="22" rx="2" />
+    <ellipse cx="42" cy="78" rx="6" ry="3" transform="rotate(-30 42 78)" opacity="0.7" />
+    <ellipse cx="58" cy="78" rx="6" ry="3" transform="rotate(30 58 78)" opacity="0.7" />
+  </svg>
+);
+
 const Footer = () => {
   return (
     <footer className="bg-burgundy text-white">
@@ -7,24 +29,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Logo & Description */}
           <div className="md:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <svg
-                className="w-10 h-10 text-gold"
-                viewBox="0 0 100 100"
-                fill="currentColor"
-              >
-                <circle cx="50" cy="35" r="8" />
-                <circle cx="35" cy="45" r="6" />
-                <circle cx="65" cy="45" r="6" />
-                <circle cx="30" cy="55" r="5" />
-                <circle cx="70" cy="55" r="5" />
-                <circle cx="40" cy="55" r="6" />
-                <circle cx="60" cy="55" r="6" />
-                <circle cx="50" cy="50" r="7" />
-                <rect x="48" y="60" width="4" height="25" />
-              </svg>
-              <span className="text-2xl font-serif tracking-widest">AJISAI</span>
-            </div>
+            <Link href="/" className="flex items-center space-x-2 mb-4 group">
+              <AjisaiFlower className="w-10 h-10 text-gold group-hover:scale-110 transition-transform duration-300" />
+              <span className="text-2xl font-serif tracking-[0.2em]">AJISAI</span>
+            </Link>
             <p className="text-gray-300 text-sm leading-relaxed">
               Experience the artistry of authentic Japanese cuisine in the heart of Portland. 
               From meticulously crafted sushi to soul-warming ramen, every dish tells a story.
@@ -76,7 +84,7 @@ const Footer = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>1234 NW 23rd Avenue<br />Portland, OR 97210</span>
+                <span>123 Pearl District<br />Portland, OR 97209</span>
               </li>
               <li className="flex items-center space-x-2">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
